@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="700" prefWidth="1100" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<HBox prefHeight="700" prefWidth="1100" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.Home_Page_Controller">
 
     <!-- SIDEBAR -->
     <VBox alignment="TOP_CENTER" prefHeight="700.0" prefWidth="45.0" spacing="25" style="-fx-background-color: #0F172A;" HBox.hgrow="NEVER">
@@ -25,46 +25,46 @@
         </padding>
 
         <Button prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-text-fill: orange; -fx-cursor: hand;">
-         <graphic>
-            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../java/icons/Home.png" />
-               </image></ImageView>
-         </graphic></Button>
+            <graphic>
+                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../java/icons/Home.png" />
+                    </image></ImageView>
+            </graphic></Button>
         <Button prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;">
-         <graphic>
-            <ImageView blendMode="LIGHTEN" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../java/icons/Applications.png" />
-               </image></ImageView>
-         </graphic></Button>
+            <graphic>
+                <ImageView blendMode="LIGHTEN" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../java/icons/Applications.png" />
+                    </image></ImageView>
+            </graphic></Button>
         <Button prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;">
-         <graphic>
-            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../java/icons/Resume.png" />
-               </image></ImageView>
-         </graphic></Button>
+            <graphic>
+                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../java/icons/Resume.png" />
+                    </image></ImageView>
+            </graphic></Button>
         <Button prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;">
-         <graphic>
-            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../java/icons/Calendar%20Plus.png" />
-               </image></ImageView>
-         </graphic></Button>
-        <Button prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;">
-         <graphic>
-            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../java/icons/Pie%20Chart.png" />
-               </image></ImageView>
-         </graphic></Button>
+            <graphic>
+                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../java/icons/Calendar%20Plus.png" />
+                    </image></ImageView>
+            </graphic></Button>
         <Button prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;">
             <graphic>
                 <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../java/icons/Settings.png" />
-               </image></ImageView>
+                    <image>
+                        <Image url="@../../../../java/icons/Pie%20Chart.png" />
+                    </image></ImageView>
+            </graphic></Button>
+        <Button prefHeight="50.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;">
+            <graphic>
+                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../../../java/icons/Settings.png" />
+                    </image></ImageView>
             </graphic></Button>
     </VBox>
 
@@ -79,7 +79,8 @@
         <HBox alignment="CENTER_LEFT" spacing="20">
 
             <VBox>
-                <Label style="-fx-font-size: 22; -fx-font-weight: bold;" text="WELCOME" />
+                <Label fx:id="welcome_label" style="-fx-font-size: 22; -fx-font-weight: bold;" text="WELCOME" />
+
                 <Label text="HERE IS YOUR AGENDA FOR TODAY" />
             </VBox>
 
@@ -127,10 +128,10 @@
                         <ColumnConstraints percentWidth="50" />
                         <ColumnConstraints percentWidth="50" />
                     </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints />
-               </rowConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                    </rowConstraints>
 
                 </GridPane>
             </VBox>
@@ -148,9 +149,9 @@
                     <CheckBox text="X's Application" />
                     <Region HBox.hgrow="ALWAYS" />
                     <Button style="-fx-background-color: #4ADE80;" text="STATUS">
-                  <cursor>
-                     <Cursor fx:constant="HAND" />
-                  </cursor></Button>
+                        <cursor>
+                            <Cursor fx:constant="HAND" />
+                        </cursor></Button>
                 </HBox>
 
                 <HBox spacing="20">
