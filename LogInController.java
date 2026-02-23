@@ -49,7 +49,7 @@ public class LogInController {
             Session.setCurrentUser(username);
 
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("Home_Page.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.show();

@@ -5,61 +5,155 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.demo2.DashboardController"
-            style="-fx-background-color: #E6E4FF;">
+<BorderPane prefHeight="699.0" prefWidth="1099.0" style="-fx-background-color: #E6E4FF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.DashboardController">
 
-    <!-- MAIN CONTENT ONLY -->
+    <!-- ================= LEFT SIDEBAR ================= -->
+    <left>
+        <VBox alignment="TOP_CENTER" prefWidth="60" spacing="25" style="-fx-background-color: #0F172A;">
+
+            <padding>
+                <Insets top="30" />
+            </padding>
+
+            <!-- HOME -->
+            <Button style="-fx-background-color: transparent; -fx-cursor: hand;">
+                <graphic>
+                    <ImageView fitHeight="18" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../../java/icons/Home.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <!-- APPLICATIONS -->
+            <Button style="-fx-background-color: transparent; -fx-cursor: hand;">
+                <graphic>
+                    <ImageView fitHeight="18" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../../java/icons/Applications.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <!-- RESUME -->
+            <Button style="-fx-background-color: transparent; -fx-cursor: hand;">
+                <graphic>
+                    <ImageView fitHeight="18" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../../java/icons/Resume.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <!-- CALENDAR -->
+            <Button style="-fx-background-color: transparent; -fx-cursor: hand;">
+                <graphic>
+                    <ImageView fitHeight="18" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../../java/icons/Calendar%20Plus.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <!-- CHART -->
+            <Button style="-fx-background-color: transparent; -fx-cursor: hand;">
+                <graphic>
+                    <ImageView fitHeight="18" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../../java/icons/Pie%20Chart.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+            <!-- SETTINGS -->
+            <Button style="-fx-background-color: transparent; -fx-cursor: hand;">
+                <graphic>
+                    <ImageView fitHeight="18" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../../java/icons/Settings.png" />
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+
+        </VBox>
+    </left>
+
+    <!-- ================= CENTER CONTENT ================= -->
     <center>
-        <VBox spacing="30" padding="40">
+        <VBox spacing="30">
+
+            <padding>
+                <Insets bottom="40" left="40" right="40" top="40" />
+            </padding>
+
             <!-- HEADER -->
-            <Label text="DASHBOARD AND SUMMARY" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+            <Label fx:id="welcomeLabel" style="-fx-font-size: 22px; -fx-font-weight: bold;" text="Welcome" />
 
             <!-- CARDS -->
             <HBox spacing="20">
                 <VBox fx:id="totalAppsCard" spacing="10" style="-fx-background-color: white; -fx-background-radius: 12;" HBox.hgrow="ALWAYS">
+
                     <padding>
-                        <Insets top="15" right="15" bottom="15" left="15"/>
+                        <Insets bottom="15" left="15" right="15" top="15" />
                     </padding>
-                    <Label text="Total Applications" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
-                    <Label fx:id="totalAppsLabel" text="0" style="-fx-font-size: 36px; -fx-font-weight: bold;"/>
+
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Total Applications" />
+
+                    <Label fx:id="totalAppsLabel" style="-fx-font-size: 36px; -fx-font-weight: bold;" text="0" />
                 </VBox>
 
                 <VBox fx:id="totalInterviewCard" spacing="10" style="-fx-background-color: white; -fx-background-radius: 12;" HBox.hgrow="ALWAYS">
+
                     <padding>
-                        <Insets top="15" right="15" bottom="15" left="15"/>
+                        <Insets bottom="15" left="15" right="15" top="15" />
                     </padding>
-                    <Label text="Total Interviews Scheduled" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
-                    <Label fx:id="totalInterviewLabel" text="0" style="-fx-font-size: 36px; -fx-font-weight: bold;"/>
+
+                    <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Total Interviews Scheduled" />
+
+                    <Label fx:id="totalInterviewLabel" style="-fx-font-size: 36px; -fx-font-weight: bold;" text="0" />
                 </VBox>
             </HBox>
 
             <!-- CHARTS -->
             <HBox spacing="20" VBox.vgrow="ALWAYS">
-                <!-- Bar Chart -->
+
                 <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 15;" HBox.hgrow="ALWAYS">
-                    <Label text="Application Status" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                    <BarChart fx:id="barChart" title="Application Status" VBox.vgrow="ALWAYS">
+
+                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Application Status" />
+
+                    <BarChart fx:id="barChart" VBox.vgrow="ALWAYS">
+
                         <xAxis>
-                            <CategoryAxis fx:id="xAxis" label="Category"/>
+                            <CategoryAxis fx:id="xAxis" />
                         </xAxis>
+
                         <yAxis>
-                            <NumberAxis fx:id="yAxis" label="Value"/>
+                            <NumberAxis fx:id="yAxis" />
                         </yAxis>
                     </BarChart>
                 </VBox>
 
-                <!-- Pie Chart -->
                 <VBox spacing="10" style="-fx-background-color: white; -fx-background-radius: 12; -fx-padding: 15;" HBox.hgrow="ALWAYS">
-                    <Label text="Status Breakdown" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
-                    <PieChart fx:id="pieChart" VBox.vgrow="ALWAYS"/>
+
+                    <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Status Breakdown" />
+
+                    <PieChart fx:id="pieChart" VBox.vgrow="ALWAYS" />
                 </VBox>
+
             </HBox>
         </VBox>
     </center>
