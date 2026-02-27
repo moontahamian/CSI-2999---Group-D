@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700"
+            prefWidth="1100"
+            xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/25"
+            fx:controller="com.example.demo2.ApplicationsController">
+
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <fx:include source="Sidebar.fxml"/>
+    </left>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <StackPane style="-fx-background-color: #E6E4FF;">
+
+            <VBox alignment="TOP_LEFT" spacing="25" style="-fx-padding: 40;">
+
+                <!-- PAGE TITLE -->
+                <Label style="-fx-font-size: 26; -fx-font-weight: bold;" text="CREATE APPLICATION" />
+
+                <!-- CARD -->
+                <VBox spacing="20" style="-fx-background-color: white;
+                -fx-background-radius: 15;
+                -fx-padding: 35;" VBox.vgrow="ALWAYS">
+
+                    <Label style="-fx-font-size: 20; -fx-font-weight: bold;" text="Application Record" />
+
+                    <GridPane hgap="15" vgap="15">
+
+                        <Label text="Company Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <TextField fx:id="companyField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                        <Label text="Position Title:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="titleField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                        <Label text="Application Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <DatePicker fx:id="datePicker" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                        <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="statusCombo" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                        <Label text="Deadline:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <DatePicker fx:id="deadlinePicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                        <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                        <TextField fx:id="locationField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <columnConstraints>
+                     <ColumnConstraints />
+                     <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
+
+                    </GridPane>
+
+                    <Label text="Description:" />
+                    <TextArea fx:id="descriptionArea" prefHeight="80" wrapText="true" />
+
+                    <Label text="Notes:" />
+                    <TextArea fx:id="notesArea" prefHeight="70" wrapText="true" />
+
+                    <!-- BUTTON -->
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button fx:id="addApplicationButton" onAction="#handleAddApplication" style="-fx-background-color: #0F172A;
+                        -fx-text-fill: white;
+                        -fx-background-radius: 10;
+                        -fx-font-weight: bold;
+                        -fx-padding: 8 20;" text="ADD APPLICATION" />
+                    </HBox>
+
+                </VBox>
+            </VBox>
+        </StackPane>
+    </center>
+
+</BorderPane>

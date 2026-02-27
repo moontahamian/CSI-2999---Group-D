@@ -9,73 +9,87 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="507.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.LogInController">
+<HBox prefHeight="500.0"
+      prefWidth="800.0"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.demo2.LogInController">
 
-   <!-- LEFT SIDE (NOW RESPONSIVE) -->
-   <VBox alignment="CENTER" spacing="40" style="-fx-background-color: #E6E4FF;" HBox.hgrow="ALWAYS">
+    <!-- LEFT SIDE (NOW RESPONSIVE) -->
+    <VBox alignment="CENTER" spacing="40" style="-fx-background-color: #E6E4FF;" HBox.hgrow="ALWAYS">
 
-      <VBox alignment="CENTER" maxWidth="350" prefHeight="220.0" prefWidth="189.0" spacing="20">
+        <VBox alignment="CENTER" maxWidth="350" prefHeight="220.0" prefWidth="189.0" spacing="20">
 
-         <ImageView fx:id="logo_image" fitHeight="180" preserveRatio="true" />
+            <ImageView fx:id="logo_image" fitHeight="180" preserveRatio="true" />
 
-         <Label fx:id="logo_description_label" maxWidth="300" style="-fx-font-size: 14;" textAlignment="CENTER" wrapText="true" />
+            <Label fx:id="logo_description_label" maxWidth="300" style="-fx-font-size: 14;" textAlignment="CENTER" wrapText="true" />
 
-      </VBox>
+        </VBox>
 
-   </VBox>
+    </VBox>
 
-   <!-- RIGHT SIDE (LOGIN FORM) -->
-   <VBox alignment="CENTER" spacing="25" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
+    <!-- RIGHT SIDE (LOGIN FORM) -->
+    <VBox alignment="CENTER" spacing="25" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
 
-      <VBox alignment="CENTER_LEFT" maxWidth="320" spacing="15">
+        <VBox alignment="CENTER_LEFT" maxWidth="320" spacing="15">
 
-         <Label text="NEXTSTEP">
-            <font>
-               <Font name="Segoe Print Bold" size="22" />
-            </font>
-         </Label>
-
-         <Label text="Username">
-            <font>
-               <Font name="Arial Rounded MT Bold" size="13" />
-            </font>
-         </Label>
-
-         <TextField fx:id="usename_tf" prefHeight="32" style="-fx-background-color: #d1d6de;                               -fx-border-color: black;                               -fx-background-radius: 10;                               -fx-border-radius: 10;" />
-
-         <Label text="Password">
-            <font>
-               <Font name="Arial Rounded MT Bold" size="13" />
-            </font>
-         </Label>
-
-         <PasswordField fx:id="password_tf" prefHeight="32" style="-fx-background-color: #d1d6de;                                   -fx-border-color: black;                                   -fx-background-radius: 10;                                   -fx-border-radius: 10;" />
-
-         <Button fx:id="login_button" maxWidth="Infinity" onAction="#loginClicked" prefHeight="35" style="-fx-background-color: #E6E4FF;                            -fx-background-radius: 10;                            -fx-cursor: hand;" text="Log in">
-            <font>
-               <Font name="Arial Rounded MT Bold" size="16" />
-            </font>
-         </Button>
-
-         <HBox alignment="CENTER" prefHeight="13.0" prefWidth="320.0" spacing="5">
-
-            <Label text="Not a user?">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="16" />
-               </font>
+            <Label text="NEXTSTEP">
+                <font>
+                    <Font name="Segoe Print Bold" size="22" />
+                </font>
             </Label>
 
-            <Button fx:id="Signup_button" onAction="#signUpClicked" style="-fx-background-color: transparent;                                -fx-cursor: hand;" text="Sign up!" textFill="#1b1b1b" underline="true">
-               <font>
-                  <Font name="Arial Black" size="16" />
-               </font>
+            <Label text="Username">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="13" />
+                </font>
+            </Label>
+
+            <TextField fx:id="usename_tf" prefHeight="32" style="-fx-background-color: #d1d6de;
+            -fx-border-color: black;
+            -fx-background-radius: 10;
+            -fx-border-radius: 10;" />
+
+            <Label text="Password">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="13" />
+                </font>
+            </Label>
+
+            <PasswordField fx:id="password_tf" prefHeight="32" style="-fx-background-color: #d1d6de;
+            -fx-border-color: black;
+            -fx-background-radius: 10;
+            -fx-border-radius: 10;" />
+
+            <Button fx:id="login_button" maxWidth="Infinity" onAction="#loginClicked" prefHeight="35" style="-fx-background-color: #E6E4FF;                            -fx-background-radius: 10;                            -fx-cursor: hand;" text="Log in">
+                <font>
+                    <Font name="Arial Rounded MT Bold" size="16" />
+                </font>
             </Button>
 
-         </HBox>
+            <HBox alignment="CENTER" prefHeight="13.0" prefWidth="320.0" spacing="5">
 
-      </VBox>
-      <Label fx:id="notMemberLabel" />
+                <Label text="Not a user?">
+                    <font>
+                        <Font name="Arial Rounded MT Bold" size="16" />
+                    </font>
+                </Label>
 
-   </VBox>
+                <Button fx:id="Signup_button" onAction="#signUpClicked" style="-fx-background-color: transparent;
+                        -fx-cursor: hand;"
+                        text="Sign up!"
+                        textFill="#1b1b1b"
+                        underline="true">
+                    <font>
+                        <Font name="Arial Black" size="16" />
+                    </font>
+                </Button>
+
+            </HBox>
+
+        </VBox>
+        <Label fx:id="notMemberLabel" />
+
+    </VBox>
 
 </HBox>

@@ -8,10 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="700" prefWidth="1100"
-      fx:controller="com.example.demo2.SignUpController"
-      xmlns="http://javafx.com/javafx/23.0.1"
-      xmlns:fx="http://javafx.com/fxml/1">
+<HBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.SignUpController">
 
     <!-- LEFT SIDEBAR -->
     <VBox alignment="CENTER" prefHeight="700.0" prefWidth="357.0" style="-fx-background-color: #0F172A;">
@@ -39,16 +36,8 @@
 
             <PasswordField fx:id="confirm_password_text" prefHeight="40" promptText="Confirm Password" style="-fx-background-radius: 10;" />
 
-            <Button fx:id="create_button" maxWidth="Infinity"
-                    onAction="#create_button_clicked"
-                    prefHeight="45" style="-fx-background-color: #0F172A;
-                     -fx-text-fill: white;
-                     -fx-background-radius: 10;
-                     -fx-font-weight: bold;"
-                    text="Create Account" />
-            <Label fx:id="message_label"
-                   textFill="red"
-                   wrapText="true"/>
+            <Button fx:id="create_button" maxWidth="Infinity" onAction="#create_button_clicked" prefHeight="45" style="-fx-background-color: #0F172A;                      -fx-text-fill: white;                      -fx-background-radius: 10;                      -fx-font-weight: bold;" text="Create Account" />
+            <Label fx:id="message_label" textFill="red" wrapText="true" />
 
 
         </VBox>

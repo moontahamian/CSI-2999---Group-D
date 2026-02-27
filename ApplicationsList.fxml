@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.demo2.ApplicationsListController"
+            prefWidth="1100"
+            prefHeight="700"
+            style="-fx-background-color: #E6E4FF;">
+
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <fx:include source="Sidebar.fxml"/>
+    </left>
+
+    <!-- CENTER CONTENT -->
+    <center>
+        <VBox spacing="25">
+
+            <padding>
+                <Insets top="40" left="40" right="40" bottom="40"/>
+            </padding>
+
+            <!-- TITLE -->
+            <Label text="ALL APPLICATIONS"
+                   style="-fx-font-size: 26; -fx-font-weight: bold;"/>
+
+            <!-- SCROLLABLE LIST -->
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS"
+                        style="-fx-background-color: transparent;">
+
+                <VBox fx:id="applicationListContainer"
+                      spacing="15"/>
+            </ScrollPane>
+
+            <!-- ADD BUTTON -->
+            <HBox alignment="CENTER_RIGHT">
+                <Button text="ADD APPLICATION"
+                        onAction="#handleAddApplication"
+                        style="-fx-background-color: #0F172A;
+                               -fx-text-fill: white;
+                               -fx-background-radius: 10;
+                               -fx-font-weight: bold;
+                               -fx-padding: 8 20;"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>
