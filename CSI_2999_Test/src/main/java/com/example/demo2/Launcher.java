@@ -15,8 +15,6 @@ public class Launcher extends Application {
         DButils.createApplicationsTable();
         DButils.createCalendarTable();   // ← IMPORTANT (NEW)
 
-        DButils.createResumesTable();
-
         FXMLLoader fxmlLoader =
                 new FXMLLoader(Launcher.class.getResource("Log_in.fxml"));
 
