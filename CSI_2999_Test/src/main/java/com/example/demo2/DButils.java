@@ -262,6 +262,79 @@ public class DButils {
         }
     }
 
+    // RESUMES
+    public static void createResumesTable() {
+
+        String query = """
+                CREATE TABLE IF NOT EXISTS resumes (
+                    user_id INTEGER PRIMARY KEY,
+                    file_name TEXT NOT NULL,
+                    pdf_data BLOB NOT NULL,
+                    uploaded_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+                );
+                """;
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.execute();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveResume(int userId, String fileName, byte[] pdfData) {
+
+        String query = """
+                INSERT INTO resumes (user_id, file_name, pdf_data, uploaded_at)
+                VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+                ON CONFLICT(user_id)
+                DO UPDATE SET
+                    file_name=excluded.file_name,
+                    pdf_data=excluded.pdf_data,
+                    uploaded_at=CURRENT_TIMESTAMP;
+                """;
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, userId);
+            ps.setString(2, fileName);
+            ps.setBytes(3, pdfData);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Could not save resume to the database.", e);
+        }
+    }
+
+    public static ResumeFile getResumeForUser(int userId) {
+
+        String query = "SELECT file_name, pdf_data FROM resumes WHERE user_id=?";
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return new ResumeFile(
+                            rs.getString("file_name"),
+                            rs.getBytes("pdf_data")
+                    );
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     // Calendar Entry Record
     public static class CalendarEntry {
 
@@ -279,6 +352,25 @@ public class DButils {
 
         public String getNotes() {
             return notes;
+        }
+    }
+
+    public static class ResumeFile {
+
+        private final String fileName;
+        private final byte[] pdfData;
+
+        public ResumeFile(String fileName, byte[] pdfData) {
+            this.fileName = fileName;
+            this.pdfData = pdfData;
+        }
+
+        public String getFileName() {
+            return fileName;
+        }
+
+        public byte[] getPdfData() {
+            return pdfData;
         }
     }
 
