@@ -125,7 +125,7 @@ public class ApplicationsController {
                 description,
                 notes
         );
-
+        NotificationChecker.checkNow();
         goToPage("ApplicationsList.fxml");
     }
 

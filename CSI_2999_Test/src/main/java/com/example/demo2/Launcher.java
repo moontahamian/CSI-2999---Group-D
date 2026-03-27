@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.sqlite.core.DB;
 
 public class Launcher extends Application {
 
@@ -14,7 +15,9 @@ public class Launcher extends Application {
         DButils.createUsersTable();
         DButils.createApplicationsTable();
         DButils.createCalendarTable();
+        DButils.createNotificationsTable();
         DButils.createResumesTable();
+
 
         FXMLLoader fxmlLoader =
                 new FXMLLoader(Launcher.class.getResource("Log_in.fxml"));

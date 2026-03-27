@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 public class SidebarController {
 
@@ -17,6 +18,8 @@ public class SidebarController {
     @FXML private Button applicationsBtn;
     @FXML private Button calendarBtn;
     @FXML private Button logoutBtn;
+    @FXML private Button notificationsBtn;
+    @FXML private Button resumeBtn;
 
     // Navigation Helper
     private void changeCenter(ActionEvent event,
@@ -36,19 +39,27 @@ public class SidebarController {
         setActive(activePage);
     }
 
-    // Active Button Highlight
+    // Helper to get FontIcon from a Button's graphic
+    private FontIcon getIcon(Button button) {
+        return (FontIcon) button.getGraphic();
+    }
+
     private void setActive(String page) {
 
         // Reset all to white
-        homeBtn.setTextFill(Color.WHITE);
-        applicationsBtn.setTextFill(Color.WHITE);
-        calendarBtn.setTextFill(Color.WHITE);
+        getIcon(homeBtn).setIconColor(Color.WHITE);
+        getIcon(applicationsBtn).setIconColor(Color.WHITE);
+        getIcon(calendarBtn).setIconColor(Color.WHITE);
+        getIcon(notificationsBtn).setIconColor(Color.WHITE);
+        getIcon(resumeBtn).setIconColor(Color.WHITE);
 
         // Highlight selected
         switch (page) {
-            case "dashboard" -> homeBtn.setTextFill(Color.web("#ffb200"));
-            case "applications" -> applicationsBtn.setTextFill(Color.web("#ffb200"));
-            case "calendar" -> calendarBtn.setTextFill(Color.web("#ffb200"));
+            case "dashboard"      -> getIcon(homeBtn).setIconColor(Color.web("#ffb200"));
+            case "applications"   -> getIcon(applicationsBtn).setIconColor(Color.web("#ffb200"));
+            case "calendar"       -> getIcon(calendarBtn).setIconColor(Color.web("#ffb200"));
+            case "notifications"  -> getIcon(notificationsBtn).setIconColor(Color.web("#ffb200"));
+            case "resume" -> getIcon(resumeBtn).setIconColor(Color.web("#ffb200"));
         }
     }
 
@@ -63,6 +74,15 @@ public class SidebarController {
 
     public void goToCalendar(ActionEvent event) {
         changeCenter(event, "Calendar.fxml", "calendar");
+    }
+
+    public void goToNotifications(ActionEvent event) {
+        changeCenter(event, "Notifications.fxml", "notifications");
+    }
+
+
+    public void goToResume(ActionEvent event) {
+        changeCenter(event, "Resume.fxml", "resume");
     }
     @FXML
     public void logout(ActionEvent event) {

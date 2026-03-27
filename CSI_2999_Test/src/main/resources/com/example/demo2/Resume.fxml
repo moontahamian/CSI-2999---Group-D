@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.demo2.ResumeController"
+      spacing="20"
+      style="-fx-background-color: #E6E4FF;">
+
+    <padding>
+        <Insets bottom="40" left="40" right="40" top="40"/>
+    </padding>
+
+    <!-- HEADER -->
+    <Label text="Resume"
+           style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+    <!-- UPLOAD BUTTON -->
+    <Button text="Upload Resume"
+            onAction="#uploadResume"
+            style="-fx-background-color: #6366F1;
+                   -fx-text-fill: white;
+                   -fx-background-radius: 8;
+                   -fx-font-size: 13px;
+                   -fx-cursor: hand;
+                   -fx-padding: 8 16 8 16;"/>
+
+    <!-- RESUME LIST -->
+    <ScrollPane fitToWidth="true"
+                VBox.vgrow="ALWAYS"
+                style="-fx-background: transparent; -fx-background-color: transparent;">
+        <VBox fx:id="resumeListContainer" spacing="12"/>
+    </ScrollPane>
+
+</VBox>

@@ -42,7 +42,9 @@
                   <!-- CHARTS -->
                   <HBox prefWidth="983.0" spacing="20">
 
-                      <VBox prefWidth="983.0" spacing="10" style="-fx-background-color: white;                       -fx-background-radius: 12;                       -fx-padding: 15;" HBox.hgrow="ALWAYS">
+                      <VBox prefWidth="983.0" spacing="10" style="-fx-background-color: white;
+                      -fx-background-radius: 12;
+                      -fx-padding: 15;" HBox.hgrow="ALWAYS">
                      <children>
                         <HBox alignment="TOP_CENTER" prefHeight="38.0" prefWidth="953.0">
                            <children>

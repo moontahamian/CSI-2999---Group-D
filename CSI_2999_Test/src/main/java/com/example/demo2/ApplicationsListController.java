@@ -144,7 +144,6 @@ public class ApplicationsListController {
     }
 
     // Add New Application Button
-
     @FXML
     private void handleAddApplication() {
 

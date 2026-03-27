@@ -38,6 +38,7 @@ public class LogInController {
 
             Session.setCurrentUserId(userId);
             Session.setCurrentUsername(username);
+            NotificationChecker.start();
 
             System.out.println("Session after set: " + Session.getCurrentUserId());
 

@@ -1,40 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefHeight="500.0"
-      prefWidth="800.0"
-      xmlns="http://javafx.com/javafx/25"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.demo2.LogInController">
+<HBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.LogInController">
 
    <!-- LEFT SIDE (NOW RESPONSIVE) -->
    <VBox alignment="CENTER" spacing="40" style="-fx-background-color: #E6E4FF;" HBox.hgrow="ALWAYS">
 
       <VBox alignment="CENTER" maxWidth="350" prefHeight="335.0" prefWidth="207.0" spacing="20">
-
-         <ImageView fx:id="logo_image" fitHeight="303.0" fitWidth="297.0" preserveRatio="true">
-            <cursor>
-               <Cursor fx:constant="DEFAULT" />
-            </cursor>
-            <effect>
-               <InnerShadow height="50.83" radius="30.5275" width="73.28" />
-            </effect>
-            <image>
-               <Image url="file:/C:/Users/marli/IdeaProjects/CSI_2999_Test/src/main/java/icons/Next_Step_Logo_11.png" />
-            </image></ImageView>
-
-         <Label fx:id="logo_description_label" maxWidth="300" style="-fx-font-size: 14;" textAlignment="CENTER" wrapText="true" />
+         <Label text="NEXTSTEP">
+            <font>
+               <Font name="Segoe Print Bold" size="22" />
+            </font>
+         </Label>
+         <Label alignment="CENTER" prefHeight="178.0" prefWidth="340.0" text="Your Future, Connected">
+            <font>
+               <Font name="Segoe Print" size="24.0" />
+            </font>
+         </Label>
 
       </VBox>
 
@@ -45,7 +34,7 @@
 
       <VBox alignment="CENTER_LEFT" maxWidth="320" spacing="15">
 
-         <Label text="NEXTSTEP">
+         <Label alignment="CENTER" prefHeight="39.0" prefWidth="322.0" text="NEXTSTEP">
             <font>
                <Font name="Segoe Print Bold" size="22" />
             </font>
@@ -57,10 +46,7 @@
             </font>
          </Label>
 
-         <TextField fx:id="usename_tf" prefHeight="32" style="-fx-background-color: #d1d6de;
-         -fx-border-color: black;
-         -fx-background-radius: 10;
-         -fx-border-radius: 10;" />
+         <TextField fx:id="usename_tf" prefHeight="32" style="-fx-background-color: #d1d6de; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" />
 
          <Label text="Password">
             <font>
@@ -68,12 +54,9 @@
             </font>
          </Label>
 
-         <PasswordField fx:id="password_tf" prefHeight="32" style="-fx-background-color: #d1d6de;
-         -fx-border-color: black;
-         -fx-background-radius: 10;
-         -fx-border-radius: 10;" />
+         <PasswordField fx:id="password_tf" prefHeight="32" style="-fx-background-color: #d1d6de; -fx-border-color: black; -fx-background-radius: 10; -fx-border-radius: 10;" />
 
-         <Button fx:id="login_button" maxWidth="Infinity" onAction="#loginClicked" prefHeight="35" style="-fx-background-color: #E6E4FF;                            -fx-background-radius: 10;                            -fx-cursor: hand;" text="Log in">
+         <Button fx:id="login_button" maxWidth="Infinity" onAction="#loginClicked" prefHeight="35" style="-fx-background-color: #E6E4FF; -fx-background-radius: 10; -fx-cursor: hand;" text="Log in">
             <font>
                <Font name="Arial Rounded MT Bold" size="16" />
             </font>
@@ -87,8 +70,7 @@
                </font>
             </Label>
 
-            <Button fx:id="Signup_button" onAction="#signUpClicked" style="-fx-background-color: transparent;
-            -fx-cursor: hand;" text="Sign up!" textFill="#1b1b1b" underline="true">
+            <Button fx:id="Signup_button" onAction="#signUpClicked" style="-fx-background-color: transparent; -fx-cursor: hand;" text="Sign up!" textFill="#1b1b1b" underline="true">
                <font>
                   <Font name="Arial Black" size="16" />
                </font>

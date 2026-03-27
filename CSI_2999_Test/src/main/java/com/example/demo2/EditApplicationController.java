@@ -88,7 +88,7 @@ public class EditApplicationController {
                 description,
                 notes
         );
-
+        NotificationChecker.checkNow();
         goToPage("ApplicationsList.fxml");
     }
 

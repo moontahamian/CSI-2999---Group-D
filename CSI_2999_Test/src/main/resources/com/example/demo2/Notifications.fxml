@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.Button?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.demo2.NotificationsController"
+      spacing="20"
+      style="-fx-background-color: #E6E4FF;">
+
+    <padding>
+        <Insets bottom="40" left="40" right="40" top="40"/>
+    </padding>
+
+    <!-- HEADER -->
+    <Label text="Notifications"
+           style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+    <!-- NOTIFICATIONS LIST -->
+    <ScrollPane fitToWidth="true"
+                VBox.vgrow="ALWAYS"
+                style="-fx-background: transparent; -fx-background-color: transparent;">
+        <VBox fx:id="notificationsContainer" spacing="12"/>
+    </ScrollPane>
+    <Button text="Clear All"
+            onAction="#handleClearAll"
+            style="-fx-background-color: #EF4444;
+               -fx-text-fill: white;
+               -fx-background-radius: 8;
+               -fx-cursor: hand;"/>
+
+</VBox>

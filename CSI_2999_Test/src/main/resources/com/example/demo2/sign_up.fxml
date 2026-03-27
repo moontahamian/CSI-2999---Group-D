@@ -15,9 +15,12 @@
     <!-- LEFT SIDEBAR -->
     <VBox alignment="CENTER" prefHeight="700.0" prefWidth="357.0" style="-fx-background-color: #0F172A;">
 
-        <Label style="-fx-text-fill: white;                       -fx-font-size: 26;                       -fx-font-weight: bold;" text="WELCOME" />
+        <Label style="-fx-text-fill: white;
+        -fx-font-size: 26;
+        -fx-font-weight: bold;" text="WELCOME" />
 
-        <Label style="-fx-text-fill: #94A3B8;                       -fx-padding: 10 0 0 0;" text="Create your account" />
+        <Label style="-fx-text-fill: #94A3B8;
+        -fx-padding: 10 0 0 0;" text="Create your account" />
 
     </VBox>
 
@@ -30,7 +33,7 @@
         <!-- SIGN UP CARD -->
         <VBox alignment="CENTER_LEFT" maxWidth="400" spacing="18" style="-fx-background-color: #E6E4FF; -fx-background-radius: 20; -fx-padding: 40;">
 
-            <Label style="-fx-font-size: 22;                           -fx-font-weight: bold;" text="Sign Up" />
+            <Label style="-fx-font-size: 22; -fx-font-weight: bold;" text="Sign Up" />
 
             <TextField fx:id="name_text" prefHeight="40" promptText="Full Name" style="-fx-background-radius: 10;" />
 

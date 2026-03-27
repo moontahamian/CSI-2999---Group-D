@@ -1,6 +1,7 @@
 package com.example.demo2;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Map;
 
 public class DButils {
 
-    private static final String URL = "jdbc:sqlite:newdatabase.db";
+    private static final String URL = "jdbc:sqlite:C:/Users/marli/IdeaProjects/CSI_2999_Test/newdatabase.db";
 
     // CONNECTION
     public static Connection getConnection() throws Exception {
@@ -49,7 +50,7 @@ public class DButils {
             return true;
 
         } catch (Exception e) {
-            return false; // duplicate username
+            return false;
         }
     }
 
@@ -181,14 +182,56 @@ public class DButils {
 
     public static void deleteApplication(int applicationId) {
 
+        // First get the application details to match notifications
+        String getAppQuery = "SELECT company_name, job_title FROM applications WHERE id=?";
+        String companyName = "";
+        String jobTitle = "";
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(getAppQuery)) {
+            ps.setInt(1, applicationId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                companyName = rs.getString("company_name");
+                jobTitle = rs.getString("job_title");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Delete related notifications
+        String deleteNotifQuery = """
+            DELETE FROM notifications
+            WHERE message LIKE ? AND message LIKE ?
+            """;
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(deleteNotifQuery)) {
+            ps.setString(1, "%" + companyName + "%");
+            ps.setString(2, "%" + jobTitle + "%");
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Then delete the application
         String query = "DELETE FROM applications WHERE id=?";
 
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
-
             ps.setInt(1, applicationId);
             ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    public static void clearAllNotifications(int userId) {
+        String query = "DELETE FROM notifications WHERE user_id=?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -262,79 +305,6 @@ public class DButils {
         }
     }
 
-    // RESUMES
-    public static void createResumesTable() {
-
-        String query = """
-                CREATE TABLE IF NOT EXISTS resumes (
-                    user_id INTEGER PRIMARY KEY,
-                    file_name TEXT NOT NULL,
-                    pdf_data BLOB NOT NULL,
-                    uploaded_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
-                );
-                """;
-
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
-
-            ps.execute();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void saveResume(int userId, String fileName, byte[] pdfData) {
-
-        String query = """
-                INSERT INTO resumes (user_id, file_name, pdf_data, uploaded_at)
-                VALUES (?, ?, ?, CURRENT_TIMESTAMP)
-                ON CONFLICT(user_id)
-                DO UPDATE SET
-                    file_name=excluded.file_name,
-                    pdf_data=excluded.pdf_data,
-                    uploaded_at=CURRENT_TIMESTAMP;
-                """;
-
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
-
-            ps.setInt(1, userId);
-            ps.setString(2, fileName);
-            ps.setBytes(3, pdfData);
-            ps.executeUpdate();
-
-        } catch (Exception e) {
-            throw new RuntimeException("Could not save resume to the database.", e);
-        }
-    }
-
-    public static ResumeFile getResumeForUser(int userId) {
-
-        String query = "SELECT file_name, pdf_data FROM resumes WHERE user_id=?";
-
-        try (Connection conn = getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
-
-            ps.setInt(1, userId);
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return new ResumeFile(
-                            rs.getString("file_name"),
-                            rs.getBytes("pdf_data")
-                    );
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
     // Calendar Entry Record
     public static class CalendarEntry {
 
@@ -346,32 +316,8 @@ public class DButils {
             this.notes = notes;
         }
 
-        public String getTitle() {
-            return title;
-        }
-
-        public String getNotes() {
-            return notes;
-        }
-    }
-
-    public static class ResumeFile {
-
-        private final String fileName;
-        private final byte[] pdfData;
-
-        public ResumeFile(String fileName, byte[] pdfData) {
-            this.fileName = fileName;
-            this.pdfData = pdfData;
-        }
-
-        public String getFileName() {
-            return fileName;
-        }
-
-        public byte[] getPdfData() {
-            return pdfData;
-        }
+        public String getTitle() { return title; }
+        public String getNotes() { return notes; }
     }
 
     public static CalendarEntry getCalendarData(int userId, String date) {
@@ -429,6 +375,129 @@ public class DButils {
         }
     }
 
+    // NOTIFICATIONS
+    public static void createNotificationsTable() {
+        String query = """
+            CREATE TABLE IF NOT EXISTS notifications (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_id INTEGER NOT NULL,
+                message TEXT NOT NULL,
+                created_at TEXT NOT NULL,
+                is_read INTEGER DEFAULT 0,
+                FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+            );
+            """;
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void insertNotification(int userId, String message) {
+
+        String checkQuery = """
+            SELECT id FROM notifications
+            WHERE user_id=? AND message=? AND created_at=?
+            """;
+        String today = LocalDate.now().toString();
+
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(checkQuery)) {
+            ps.setInt(1, userId);
+            ps.setString(2, message);
+            ps.setString(3, today);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String query = """
+            INSERT INTO notifications (user_id, message, created_at)
+            VALUES (?, ?, ?)
+            """;
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            ps.setString(2, message);
+            ps.setString(3, today);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<Notification> getNotifications(int userId) {
+        List<Notification> list = new ArrayList<>();
+        String query = """
+            SELECT id, message, created_at, is_read
+            FROM notifications
+            WHERE user_id=?
+            ORDER BY created_at DESC
+            """;
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Notification(
+                        rs.getInt("id"),
+                        rs.getString("message"),
+                        rs.getString("created_at"),
+                        rs.getInt("is_read") == 1
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static void markAllNotificationsRead(int userId) {
+        String query = "UPDATE notifications SET is_read=1 WHERE user_id=?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static int getUnreadNotificationCount(int userId) {
+        String query = "SELECT COUNT(*) FROM notifications WHERE user_id=? AND is_read=0";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public static class Notification {
+        private int id;
+        private String message;
+        private String createdAt;
+        private boolean read;
+
+        public Notification(int id, String message, String createdAt, boolean read) {
+            this.id = id;
+            this.message = message;
+            this.createdAt = createdAt;
+            this.read = read;
+        }
+
+        public int getId() { return id; }
+        public String getMessage() { return message; }
+        public String getCreatedAt() { return createdAt; }
+        public boolean isRead() { return read; }
+    }
+
     // TOTAL APPLICATIONS
     public static int getTotalApplications(int userId) {
 
@@ -438,7 +507,6 @@ public class DButils {
              PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setInt(1, userId);
-
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -452,21 +520,19 @@ public class DButils {
         return 0;
     }
 
-
-// TOTAL INTERVIEWS
-public static int getTotalInterviews(int userId) {
+    // TOTAL INTERVIEWS
+    public static int getTotalInterviews(int userId) {
 
         String query = """
-        SELECT COUNT(*) FROM applications
-        WHERE user_id=? AND status IN
-        ('Interview Scheduled','Interviewed');
-    """;
+            SELECT COUNT(*) FROM applications
+            WHERE user_id=? AND status IN
+            ('Interview Scheduled','Interviewed');
+            """;
 
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setInt(1, userId);
-
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -479,26 +545,25 @@ public static int getTotalInterviews(int userId) {
 
         return 0;
     }
+
     public static Map<String, Integer> getApplicationStatusCounts(int userId) {
 
         Map<String, Integer> result = new HashMap<>();
 
         String query = """
-        SELECT status, COUNT(*) as total
-        FROM applications
-        WHERE user_id=?
-        GROUP BY status
-    """;
+            SELECT status, COUNT(*) as total
+            FROM applications
+            WHERE user_id=?
+            GROUP BY status
+            """;
 
         try (Connection conn = getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setInt(1, userId);
-
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-
                 result.put(
                         rs.getString("status"),
                         rs.getInt("total")
@@ -511,4 +576,86 @@ public static int getTotalInterviews(int userId) {
 
         return result;
     }
+    // RESUMES
+    public static void createResumesTable() {
+        String query = """
+        CREATE TABLE IF NOT EXISTS resumes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            file_name TEXT NOT NULL,
+            pdf_data BLOB NOT NULL,
+            uploaded_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+        );
+        """;
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveResume(int userId, String fileName, byte[] pdfData) {
+        String query = """
+        INSERT INTO resumes (user_id, file_name, pdf_data, uploaded_at)
+        VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+        """;
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            ps.setString(2, fileName);
+            ps.setBytes(3, pdfData);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException("Could not save resume to the database.", e);
+        }
+    }
+
+    public static List<ResumeFile> getResumesForUser(int userId) {
+        List<ResumeFile> list = new ArrayList<>();
+        String query = "SELECT id, file_name, pdf_data FROM resumes WHERE user_id=? ORDER BY uploaded_at DESC";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new ResumeFile(
+                        rs.getInt("id"),
+                        rs.getString("file_name"),
+                        rs.getBytes("pdf_data")
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public static void deleteResume(int resumeId) {
+        String query = "DELETE FROM resumes WHERE id=?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, resumeId);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public static class ResumeFile {
+        private final int id;
+        private final String fileName;
+        private final byte[] pdfData;
+
+        public ResumeFile(int id, String fileName, byte[] pdfData) {
+            this.id = id;
+            this.fileName = fileName;
+            this.pdfData = pdfData;
+        }
+
+        public int getId() { return id; }
+        public String getFileName() { return fileName; }
+        public byte[] getPdfData() { return pdfData; }
+    }
+
 }
