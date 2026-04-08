@@ -3,13 +3,16 @@ package com.example.demo2;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.util.List;
 import java.util.Locale;
 
+import javafx.geometry.Insets;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -33,14 +36,16 @@ public class CalendarController {
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("MM-dd-yyyy");
 
-    // INITIALIZE
+    // ISO format used by applications (yyyy-MM-dd)
+    private static final DateTimeFormatter ISO_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     @FXML
     public void initialize() {
 
         display_anchor = LocalDate.now();
         calendar_popup.setVisible(false);
 
-        // Close popup
         calendar_popup_button_x.setOnAction(event -> {
 
             Integer userId = Session.getCurrentUserId();
@@ -57,14 +62,12 @@ public class CalendarController {
             draw_calendar(display_anchor);
         });
 
-        // Navigation
         calendar_button_left.setOnAction(event -> button_left());
         calendar_button_right.setOnAction(event -> button_right());
 
         draw_calendar(display_anchor);
     }
 
-    // DRAW CALENDAR
     public void draw_calendar(LocalDate date_anchor) {
 
         calendar_grid.getChildren().clear();
@@ -88,6 +91,10 @@ public class CalendarController {
         Integer userId = Session.getCurrentUserId();
         if (userId == null) return;
 
+        // Load all applications once for the whole calendar draw
+        List<ApplicationModel> applications =
+                DButils.getApplicationsByUser(userId);
+
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 7; col++) {
 
@@ -100,11 +107,13 @@ public class CalendarController {
                 DButils.CalendarEntry entry =
                         DButils.getCalendarData(userId, formattedDate);
 
-                VBox cell =
-                        draw_cell(index_date,
-                                entry.getTitle(),
-                                entry.getNotes(),
-                                inMonth);
+                VBox cell = draw_cell(
+                        index_date,
+                        entry.getTitle(),
+                        entry.getNotes(),
+                        inMonth,
+                        applications
+                );
 
                 calendar_grid.add(cell, col, row);
                 index_date = index_date.plusDays(1);
@@ -112,19 +121,20 @@ public class CalendarController {
         }
     }
 
-    // DRAW CELL
     private VBox draw_cell(LocalDate date,
                            String titleText,
                            String notesText,
-                           boolean isInMonth) {
+                           boolean isInMonth,
+                           List<ApplicationModel> applications) {
 
-        VBox cell = new VBox();
+        VBox cell = new VBox(2);
 
         String idleColor = isInMonth ? "#ffffff" : "#f4f4f4";
         String hoverColor = isInMonth ? "#e0e0e0" : "#d1d1d1";
 
         cell.setStyle("-fx-background-color: " + idleColor +
                 "; -fx-border-color: #dcdcdc; -fx-border-width: 0.2px;");
+        cell.setPadding(new Insets(2));
 
         cell.setOnMouseEntered(e ->
                 cell.setStyle("-fx-background-color: " + hoverColor +
@@ -136,12 +146,44 @@ public class CalendarController {
                         "; -fx-border-color: #dcdcdc; -fx-border-width: 0.2px;")
         );
 
+        // Day number
         Label dayLabel = new Label(String.valueOf(date.getDayOfMonth()));
         dayLabel.setStyle("-fx-font-weight: bold;");
 
+        // Manual title from DB
         Label titleLabel = new Label(titleText);
         titleLabel.setWrapText(true);
         VBox.setVgrow(titleLabel, Priority.ALWAYS);
+
+        cell.getChildren().addAll(dayLabel, titleLabel);
+
+        // Check applications for this date
+        String isoDate = date.format(ISO_FORMATTER);
+
+        for (ApplicationModel app : applications) {
+
+            // Interview Scheduled — check date_applied
+            if ("Interview Scheduled".equals(app.getStatus())
+                    && isoDate.equals(app.getDateApplied())) {
+
+                HBox dot = createEventDot(
+                        "⬤ Interview: " + app.getCompanyName(),
+                        "#6366F1"
+                );
+                cell.getChildren().add(dot);
+            }
+
+            // Deadline
+            if (app.getDeadline() != null
+                    && isoDate.equals(app.getDeadline())) {
+
+                HBox dot = createEventDot(
+                        "⬤ Deadline: " + app.getCompanyName(),
+                        "#EF4444"
+                );
+                cell.getChildren().add(dot);
+            }
+        }
 
         cell.setOnMouseClicked(e -> {
 
@@ -160,11 +202,23 @@ public class CalendarController {
             calendar_popup.setVisible(true);
         });
 
-        cell.getChildren().addAll(dayLabel, titleLabel);
         return cell;
     }
 
-    // NAVIGATION
+    // Creates a colored event label
+    private HBox createEventDot(String text, String color) {
+        HBox box = new HBox();
+        Label label = new Label(text);
+        label.setStyle(
+                "-fx-font-size: 9px;" +
+                        "-fx-text-fill: " + color + ";" +
+                        "-fx-font-weight: bold;"
+        );
+        label.setWrapText(true);
+        box.getChildren().add(label);
+        return box;
+    }
+
     private void button_left() {
         display_anchor =
                 display_anchor.minusMonths(1).withDayOfMonth(1);
