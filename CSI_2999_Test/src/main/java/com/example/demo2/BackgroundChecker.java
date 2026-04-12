@@ -9,8 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BackgroundChecker {
 
-    private static final String DB_URL =
-            "jdbc:sqlite:C:/Users/marli/IdeaProjects/CSI_2999_Test/newdatabase.db";
+    private static final String DB_URL = DButils.getDatabaseUrl();
     private static final int DAYS_BEFORE = 2;
 
     public static void main(String[] args) {

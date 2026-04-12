@@ -1,5 +1,7 @@
 package com.example.demo2;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,11 +11,18 @@ import java.util.Map;
 
 public class DButils {
 
-    private static final String URL = "jdbc:sqlite:C:/Users/marli/IdeaProjects/CSI_2999_Test/newdatabase.db";
+    private static final Path DB_PATH = Paths.get(
+            System.getProperty("app.db.path", "newdatabase.db")
+    ).toAbsolutePath().normalize();
+    private static final String URL = "jdbc:sqlite:" + DB_PATH.toString().replace('\\', '/');
 
     // CONNECTION
     public static Connection getConnection() throws Exception {
         return DriverManager.getConnection(URL);
+    }
+
+    public static String getDatabaseUrl() {
+        return URL;
     }
 
     // USERS
