@@ -1,13 +1,13 @@
 package com.example.demo2;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class DButils {
 
@@ -15,7 +15,6 @@ public class DButils {
             System.getProperty("app.db.path", "newdatabase.db")
     ).toAbsolutePath().normalize();
     private static final String URL = "jdbc:sqlite:" + DB_PATH.toString().replace('\\', '/');
-
     // CONNECTION
     public static Connection getConnection() throws Exception {
         return DriverManager.getConnection(URL);

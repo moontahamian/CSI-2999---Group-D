@@ -19,54 +19,57 @@ public class LogInController {
 
     // LOGIN
     @FXML
-        public void loginClicked(ActionEvent event) {
+    public void loginClicked(ActionEvent event) {
 
-            String username = usename_tf.getText().trim();
-            String password = password_tf.getText().trim();
+        String username = usename_tf.getText().trim();
+        String password = password_tf.getText().trim();
 
-            System.out.println("Trying login for: " + username);
+        System.out.println("Trying login for: " + username);
 
-            Integer userId = DButils.validateLogin(username, password);
+        Integer userId = DButils.validateLogin(username, password);
 
-            System.out.println("UserId returned: " + userId);
+        System.out.println("UserId returned: " + userId);
 
-            if (userId == null) {
-                notMemberLabel.setText("Invalid username or password.");
-                return;
-            }
-
-
-            Session.setCurrentUserId(userId);
-            Session.setCurrentUsername(username);
-            NotificationChecker.start();
-
-            System.out.println("Session after set: " + Session.getCurrentUserId());
-
-            try {
-
-                FXMLLoader loader =
-                        new FXMLLoader(getClass().getResource("MainLayout.fxml"));
-
-                Parent root = loader.load();
-
-                MainLayoutController mainController =
-                        loader.getController();
-
-                mainController.setCenter("Dashboard.fxml");
-                
-
-                Stage stage =
-                        (Stage) ((Node) event.getSource())
-                                .getScene()
-                                .getWindow();
-
-                stage.setScene(new Scene(root));
-                stage.show();
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (userId == null) {
+            notMemberLabel.setText("Invalid username or password.");
+            return;
         }
+
+        Session.setCurrentUserId(userId);
+        Session.setCurrentUsername(username);
+        NotificationChecker.start();
+
+        System.out.println("Session after set: " + Session.getCurrentUserId());
+
+        try {
+
+            FXMLLoader loader =
+                    new FXMLLoader(getClass().getResource("MainLayout.fxml"));
+
+            Parent root = loader.load();
+
+            MainLayoutController mainController =
+                    loader.getController();
+
+            mainController.setCenter("Dashboard.fxml");
+
+            Stage stage =
+                    (Stage) ((Node) event.getSource())
+                            .getScene()
+                            .getWindow();
+
+            Scene mainScene = new Scene(root);
+            mainScene.getStylesheets().add(
+                    getClass().getResource("style.css").toExternalForm()
+            );
+
+            stage.setScene(mainScene);
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // GO TO SIGN UP
     @FXML
@@ -82,7 +85,12 @@ public class LogInController {
                             .getScene()
                             .getWindow();
 
-            stage.setScene(new Scene(root));
+            Scene signUpScene = new Scene(root);
+            signUpScene.getStylesheets().add(
+                    getClass().getResource("style.css").toExternalForm()
+            );
+
+            stage.setScene(signUpScene);
             stage.show();
 
         } catch (Exception e) {

@@ -5,49 +5,47 @@
 <?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.*?>
 
-<VBox alignment="TOP_CENTER" spacing="35" style="-fx-background-color: #0F172A; -fx-padding: 50 0 0 0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.SidebarController">
+<VBox alignment="TOP_CENTER" prefHeight="430.0" prefWidth="42.0" spacing="35" style="-fx-background-color: #0F172A; -fx-padding: 50 0 0 0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.SidebarController">
 
     <Button fx:id="homeBtn" onAction="#goToDashboard" style="-fx-background-color: transparent; -fx-cursor: hand;" textFill="#ffb200">
         <graphic>
-            <FontIcon iconColor="#ffb200" iconLiteral="ion-ios-home" iconSize="20" />
+            <FontIcon fx:id="homeIcon" iconColor="#ffb200" iconLiteral="ion-ios-home" iconSize="21" />
         </graphic>
     </Button>
 
     <Button fx:id="applicationsBtn" onAction="#goToApplications" style="-fx-background-color: transparent; -fx-cursor: hand;" textFill="WHITE">
         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fas-layer-group" iconSize="20" />
+            <FontIcon iconColor="WHITE" iconLiteral="fas-layer-group" iconSize="18" />
         </graphic>
     </Button>
 
     <Button fx:id="calendarBtn" onAction="#goToCalendar" style="-fx-background-color: transparent; -fx-cursor: hand;" textFill="WHITE">
         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fas-calendar-alt" iconSize="20" />
+            <FontIcon iconColor="WHITE" iconLiteral="fas-calendar-alt" iconSize="18" />
         </graphic>
     </Button>
 
     <Button fx:id="resumeBtn" onAction="#goToResume" style="-fx-background-color: transparent; -fx-cursor: hand;" textFill="WHITE">
         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fas-file-pdf" iconSize="20" />
+            <FontIcon iconColor="WHITE" iconLiteral="fas-file-pdf" iconSize="18" />
         </graphic>
     </Button>
 
-   <Button fx:id="notificationsBtn" layoutX="13.0" layoutY="60.0" onAction="#goToNotifications" style="-fx-background-color: transparent; -fx-cursor: hand;" textFill="#ffb200">
-      <graphic>
-         <FontIcon iconColor="WHITE" iconLiteral="fas-bell" iconSize="20" />
-      </graphic>
-   </Button>
-
-
+    <Button fx:id="notificationsBtn" onAction="#goToNotifications" style="-fx-background-color: transparent; -fx-cursor: hand;" textFill="WHITE">
+        <graphic>
+            <FontIcon iconColor="WHITE" iconLiteral="fas-bell" iconSize="18" />
+        </graphic>
+    </Button>
 
     <Region VBox.vgrow="ALWAYS" />
 
-    <Button fx:id="logoutBtn" onAction="#logout" style="-fx-background-color: transparent; -fx-cursor: hand;" textFill="WHITE">
+    <Button fx:id="logoutBtn" onAction="#logout" style="-fx-background-color: transparent; -fx-cursor: hand;" stylesheets="style.css" textFill="WHITE">
         <graphic>
-            <FontIcon iconColor="WHITE" iconLiteral="fas-sign-out-alt" iconSize="20" />
+            <FontIcon iconColor="WHITE" iconLiteral="fas-sign-out-alt" iconSize="18" />
         </graphic>
-      <VBox.margin>
-         <Insets bottom="10.0" />
-      </VBox.margin>
+        <VBox.margin>
+            <Insets bottom="10.0" />
+        </VBox.margin>
     </Button>
 
 </VBox>

@@ -10,17 +10,14 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.SignUpController">
+<HBox prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.SignUpController">
 
     <!-- LEFT SIDEBAR -->
-    <VBox alignment="CENTER" prefHeight="700.0" prefWidth="357.0" style="-fx-background-color: #0F172A;">
+    <VBox alignment="CENTER" prefHeight="500.0" prefWidth="340.0" style="-fx-background-color: #0F172A;">
 
-        <Label style="-fx-text-fill: white;
-        -fx-font-size: 26;
-        -fx-font-weight: bold;" text="WELCOME" />
+        <Label style="-fx-text-fill: white;         -fx-font-size: 26;         -fx-font-weight: bold;" text="WELCOME" />
 
-        <Label style="-fx-text-fill: #94A3B8;
-        -fx-padding: 10 0 0 0;" text="Create your account" />
+        <Label style="-fx-text-fill: #94A3B8;         -fx-padding: 10 0 0 0;" text="Create your account" />
 
     </VBox>
 
@@ -41,9 +38,9 @@
 
             <PasswordField fx:id="confirm_password_text" prefHeight="40" promptText="Confirm Password" style="-fx-background-radius: 10;" />
 
-            <Button fx:id="create_button" maxWidth="Infinity" onAction="#create_button_clicked" prefHeight="45" style="-fx-background-color: #0F172A; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold; -fx-cursor: hand;" text="Create Account" />
+            <Button fx:id="create_button" maxWidth="Infinity" onAction="#create_button_clicked" prefHeight="45" stylesheets="@style.css" text="Create Account" />
             <Label fx:id="message_label" textFill="red" wrapText="true" />
-         <Button fx:id="back_to_log_in_btn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backToLogInBtnClicked" prefHeight="47.0" prefWidth="320.0" style="-fx-background-color: transparent; -fx-content-display: underline;" text="Back to Log In" underline="true">
+         <Button fx:id="back_to_log_in_btn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#backToLogInBtnClicked" prefHeight="47.0" prefWidth="320.0" style="-fx-background-color: transparent; -fx-content-display: underline;" stylesheets="@style.css" text="Back to Log In" underline="true">
             <cursor>
                <Cursor fx:constant="HAND" />
             </cursor>

@@ -27,6 +27,7 @@ public class ApplicationsListController {
 
         applicationListContainer.getChildren().clear();
 
+
         Integer userId = Session.getCurrentUserId();
 
         if (userId == null) {
@@ -47,52 +48,75 @@ public class ApplicationsListController {
 
         HBox container = new HBox();
         container.setSpacing(20);
+        container.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+        container.getStyleClass().add("app-card");
+
+        // Add a colored left border based on status
+        String statusColor = getStatusColor(app.getStatus());
         container.setStyle(
-                "-fx-background-color: white;" +
-                        "-fx-background-radius: 12;" +
-                        "-fx-padding: 15;"
+                "-fx-border-color: " + statusColor + " transparent transparent transparent;" +
+                        "-fx-border-width: 0 0 0 5px;"
         );
 
-        // LEFT SIDE - Company Name
+        // Status dot
+        Label statusDot = new Label("⬤");
+        statusDot.setStyle("-fx-text-fill: " + statusColor + "; -fx-font-size: 10px;");
+
+        // Company name
         Label nameLabel = new Label(app.getCompanyName());
-        nameLabel.setStyle(
-                "-fx-font-size: 16;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-cursor: hand;"
-        );
-
+        nameLabel.getStyleClass().add("app-card-title");
         nameLabel.setOnMouseClicked(e -> openApplication(app));
 
-        HBox.setHgrow(nameLabel, Priority.ALWAYS);
+        // Job title
+        Label jobLabel = new Label(app.getJobTitle());
+        jobLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #64748B;");
 
-        // EDIT BUTTON
-        Button editBtn = new Button("Edit");
-        editBtn.setStyle(
-                "-fx-background-color: #6366F1;" +
-                        "-fx-text-fill: white;"+
-                        "-fx-cursor: hand;"
+        // Name + job stacked
+        javafx.scene.layout.VBox textBox = new javafx.scene.layout.VBox(3);
+        textBox.getChildren().addAll(nameLabel, jobLabel);
+        HBox.setHgrow(textBox, Priority.ALWAYS);
+
+        // Status label
+        Label statusLabel = new Label(app.getStatus());
+        statusLabel.setStyle(
+                "-fx-font-size: 11px;" +
+                        "-fx-font-weight: bold;" +
+                        "-fx-text-fill: " + statusColor + ";" +
+                        "-fx-background-color: " + statusColor + "22;" +
+                        "-fx-background-radius: 6px;" +
+                        "-fx-padding: 3 8 3 8;"
         );
 
+        // Edit button
+        Button editBtn = new Button("Edit");
+        editBtn.getStyleClass().add("btn-edit");
         editBtn.setOnAction(e -> openEditPage(app));
 
-        // DELETE BUTTON
+        // Delete button
         Button deleteBtn = new Button("Delete");
-        deleteBtn.setStyle(
-                "-fx-background-color: #EF4444;" +
-                        "-fx-text-fill: white;"+
-                        "-fx-cursor: hand;"
-        );
-
+        deleteBtn.getStyleClass().add("btn-delete");
         deleteBtn.setOnAction(e -> {
             DButils.deleteApplication(app.getId());
             loadApplications();
         });
 
-        container.getChildren().addAll(nameLabel, editBtn, deleteBtn);
-
+        container.getChildren().addAll(statusDot, textBox, statusLabel, editBtn, deleteBtn);
         return container;
     }
 
+    private String getStatusColor(String status) {
+        if (status == null) return "#94A3B8";
+        return switch (status) {
+            case "Applied"             -> "#9244bc";
+            case "Interview Scheduled" -> "#e59a20";
+            case "Interviewed"         -> "#50a650";
+            case "Offer Received"      -> "#e56739";
+            case "Accepted"            -> "#10B981";
+            case "Rejected"            -> "#EF4444";
+            case "Withdrawn"           -> "#47a4bf";
+            default                    -> "#94A3B8";
+        };
+    }
     // Open View Application Page
     private void openApplication(ApplicationModel app) {
 

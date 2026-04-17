@@ -64,7 +64,7 @@ public class ResumeController {
 
         if (resumes.isEmpty()) {
             Label empty = new Label("No resumes uploaded yet.");
-            empty.setStyle("-fx-text-fill: #888; -fx-font-size: 14px;");
+            empty.getStyleClass().add("resume-empty-label");
             resumeListContainer.getChildren().add(empty);
             return;
         }
@@ -78,41 +78,25 @@ public class ResumeController {
 
         HBox card = new HBox();
         card.setSpacing(10);
-        card.setStyle(
-                "-fx-background-color: white;" +
-                        "-fx-background-radius: 12;" +
-                        "-fx-padding: 15;"
-        );
+        card.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+        card.getStyleClass().add("resume-card");
+
+
 
         // File name — click to open
         Label nameLabel = new Label(resume.getFileName());
-        nameLabel.setStyle(
-                "-fx-font-size: 14px;" +
-                        "-fx-font-weight: bold;" +
-                        "-fx-text-fill: #6366F1;" +
-                        "-fx-cursor: hand;"
-        );
+        nameLabel.getStyleClass().add("resume-name");
         nameLabel.setOnMouseClicked(e -> openResume(resume.getPdfData(), resume.getFileName()));
         HBox.setHgrow(nameLabel, Priority.ALWAYS);
 
         // Download button
         Button downloadBtn = new Button("Download");
-        downloadBtn.setStyle(
-                "-fx-background-color: #10B981;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-background-radius: 8;" +
-                        "-fx-cursor: hand;"
-        );
+        downloadBtn.getStyleClass().add("btn-download");
         downloadBtn.setOnAction(e -> downloadResume(resume));
 
         // Delete button
         Button deleteBtn = new Button("Delete");
-        deleteBtn.setStyle(
-                "-fx-background-color: #EF4444;" +
-                        "-fx-text-fill: white;" +
-                        "-fx-background-radius: 8;" +
-                        "-fx-cursor: hand;"
-        );
+        deleteBtn.getStyleClass().add("btn-delete");
         deleteBtn.setOnAction(e -> {
             DButils.deleteResume(resume.getId());
             loadResumes();

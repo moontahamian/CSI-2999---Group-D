@@ -128,65 +128,88 @@ public class CalendarController {
                            List<ApplicationModel> applications) {
 
         VBox cell = new VBox(2);
+        cell.setPadding(new Insets(4));
 
-        String idleColor = isInMonth ? "#ffffff" : "#f4f4f4";
-        String hoverColor = isInMonth ? "#e0e0e0" : "#d1d1d1";
+        // Background color based on in/out of month
+        String idleColor = isInMonth ? "#ffffff" : "#f8fafc";
+        String hoverColor = isInMonth ? "#E6E4FF" : "#ede9fe";
 
         cell.setStyle("-fx-background-color: " + idleColor +
-                "; -fx-border-color: #dcdcdc; -fx-border-width: 0.2px;");
-        cell.setPadding(new Insets(2));
+                "; -fx-border-color: #e2e8f0; -fx-border-width: 0.5px;");
 
         cell.setOnMouseEntered(e ->
                 cell.setStyle("-fx-background-color: " + hoverColor +
-                        "; -fx-border-color: #dcdcdc; -fx-border-width: 0.2px; -fx-cursor: hand;")
+                        "; -fx-border-color: #e2e8f0; -fx-border-width: 0.5px; -fx-cursor: hand;")
         );
 
         cell.setOnMouseExited(e ->
                 cell.setStyle("-fx-background-color: " + idleColor +
-                        "; -fx-border-color: #dcdcdc; -fx-border-width: 0.2px;")
+                        "; -fx-border-color: #e2e8f0; -fx-border-width: 0.5px;")
         );
+
+        // Highlight today
+        if (date.equals(LocalDate.now())) {
+            cell.setStyle(
+                    "-fx-background-color: #E6E4FF;" +
+                            "-fx-border-color: #112c7e;" +
+                            "-fx-border-width: 2px;"
+            );
+            cell.setOnMouseEntered(e ->
+                    cell.setStyle(
+                            "-fx-background-color: #d4d0ff;" +
+                                    "-fx-border-color: #112c7e;" +
+                                    "-fx-border-width: 2px;" +
+                                    "-fx-cursor: hand;"
+                    )
+            );
+            cell.setOnMouseExited(e ->
+                    cell.setStyle(
+                            "-fx-background-color: #E6E4FF;" +
+                                    "-fx-border-color: #112c7e;" +
+                                    "-fx-border-width: 2px;"
+                    )
+            );
+        }
 
         // Day number
         Label dayLabel = new Label(String.valueOf(date.getDayOfMonth()));
-        dayLabel.setStyle("-fx-font-weight: bold;");
+        dayLabel.setStyle(
+                "-fx-font-weight: bold;" +
+                        "-fx-font-size: 12px;" +
+                        "-fx-text-fill: " + (isInMonth ? "#1a1a2e" : "#94A3B8") + ";"
+        );
 
-        // Manual title from DB
+        // Manual title
         Label titleLabel = new Label(titleText);
         titleLabel.setWrapText(true);
+        titleLabel.setStyle("-fx-font-size: 10px; -fx-text-fill: #475569;");
         VBox.setVgrow(titleLabel, Priority.ALWAYS);
 
         cell.getChildren().addAll(dayLabel, titleLabel);
 
-        // Check applications for this date
+        // Application events
         String isoDate = date.format(ISO_FORMATTER);
 
         for (ApplicationModel app : applications) {
 
-            // Interview Scheduled — check date_applied
             if ("Interview Scheduled".equals(app.getStatus())
                     && isoDate.equals(app.getDateApplied())) {
-
                 HBox dot = createEventDot(
-                        "⬤ Interview: " + app.getCompanyName(),
-                        "#6366F1"
+                        "⬤ Interview: " + app.getCompanyName(), "#112c7e"
                 );
                 cell.getChildren().add(dot);
             }
 
-            // Deadline
             if (app.getDeadline() != null
                     && isoDate.equals(app.getDeadline())) {
-
                 HBox dot = createEventDot(
-                        "⬤ Deadline: " + app.getCompanyName(),
-                        "#EF4444"
+                        "⬤ Deadline: " + app.getCompanyName(), "#EF4444"
                 );
                 cell.getChildren().add(dot);
             }
         }
 
         cell.setOnMouseClicked(e -> {
-
             clicked_date = date.format(FORMATTER);
 
             Integer userId = Session.getCurrentUserId();

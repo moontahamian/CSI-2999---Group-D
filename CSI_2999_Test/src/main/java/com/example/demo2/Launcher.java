@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.sqlite.core.DB;
+
 
 public class Launcher extends Application {
 
@@ -23,7 +23,9 @@ public class Launcher extends Application {
                 new FXMLLoader(Launcher.class.getResource("Log_in.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
-
+        scene.getStylesheets().add(
+                Launcher.class.getResource("style.css").toExternalForm()
+        );
         stage.setTitle("NextStep");
         stage.setScene(scene);
         stage.show();

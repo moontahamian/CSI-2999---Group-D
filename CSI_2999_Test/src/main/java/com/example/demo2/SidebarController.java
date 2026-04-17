@@ -21,6 +21,28 @@ public class SidebarController {
     @FXML private Button notificationsBtn;
     @FXML private Button resumeBtn;
 
+    @FXML
+    public void initialize() {
+        addHoverEffect(homeBtn);
+        addHoverEffect(applicationsBtn);
+        addHoverEffect(calendarBtn);
+        addHoverEffect(resumeBtn);
+        addHoverEffect(notificationsBtn);
+        addHoverEffect(logoutBtn);
+    }
+
+    // Hover size effect
+    private void addHoverEffect(Button btn) {
+        FontIcon icon = getIcon(btn);
+        btn.setOnMouseEntered(e -> icon.setIconSize(21));
+        btn.setOnMouseExited(e -> icon.setIconSize(20));
+    }
+
+    // Helper to get FontIcon from a Button's graphic
+    private FontIcon getIcon(Button button) {
+        return (FontIcon) button.getGraphic();
+    }
+
     // Navigation Helper
     private void changeCenter(ActionEvent event,
                               String fxmlFile,
@@ -39,11 +61,7 @@ public class SidebarController {
         setActive(activePage);
     }
 
-    // Helper to get FontIcon from a Button's graphic
-    private FontIcon getIcon(Button button) {
-        return (FontIcon) button.getGraphic();
-    }
-
+    // Active Button Highlight
     private void setActive(String page) {
 
         // Reset all to white
@@ -55,11 +73,11 @@ public class SidebarController {
 
         // Highlight selected
         switch (page) {
-            case "dashboard"      -> getIcon(homeBtn).setIconColor(Color.web("#ffb200"));
-            case "applications"   -> getIcon(applicationsBtn).setIconColor(Color.web("#ffb200"));
-            case "calendar"       -> getIcon(calendarBtn).setIconColor(Color.web("#ffb200"));
-            case "notifications"  -> getIcon(notificationsBtn).setIconColor(Color.web("#ffb200"));
-            case "resume" -> getIcon(resumeBtn).setIconColor(Color.web("#ffb200"));
+            case "dashboard"     -> getIcon(homeBtn).setIconColor(Color.web("#ffb200"));
+            case "applications"  -> getIcon(applicationsBtn).setIconColor(Color.web("#ffb200"));
+            case "calendar"      -> getIcon(calendarBtn).setIconColor(Color.web("#ffb200"));
+            case "notifications" -> getIcon(notificationsBtn).setIconColor(Color.web("#ffb200"));
+            case "resume"        -> getIcon(resumeBtn).setIconColor(Color.web("#ffb200"));
         }
     }
 
@@ -80,10 +98,10 @@ public class SidebarController {
         changeCenter(event, "Notifications.fxml", "notifications");
     }
 
-
     public void goToResume(ActionEvent event) {
         changeCenter(event, "Resume.fxml", "resume");
     }
+
     @FXML
     public void logout(ActionEvent event) {
 
@@ -100,7 +118,12 @@ public class SidebarController {
                             .getScene()
                             .getWindow();
 
-            stage.setScene(new Scene(root));
+            Scene loginScene = new Scene(root);
+            loginScene.getStylesheets().add(
+                    getClass().getResource("style.css").toExternalForm()
+            );
+
+            stage.setScene(loginScene);
             stage.show();
 
         } catch (Exception e) {

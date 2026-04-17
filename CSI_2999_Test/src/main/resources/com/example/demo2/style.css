@@ -1,0 +1,471 @@
+/** Log In Page **/
+
+#login_button{
+  -fx-background-color : #E6E4FF;
+  -fx-background-radius: 15px;
+  -fx-cursor: hand;
+  -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+  -fx-font-size:15px;
+  -fx-font-family:"Monaco";
+  -fx-font-weight: bold;
+}
+
+#login_button:hover {
+    -fx-background-color:#c3c1e3;
+    -fx-background-radius: 15px;
+    -fx-background-color: linear-gradient(#cbc8f7,#d2d1ed);
+    -fx-font-size:16px;
+    -fx-font-family:"Monaco";
+}
+#login_button:armed{
+-fx-background-color : #E6E4FF;
+}
+
+#Signup_button{
+    -fx-background-color:transparent;
+    -fx-cursor: hand;
+}
+
+
+/** Sign Up Page **/
+
+#create_button{
+-fx-background-color: #0F172A;
+-fx-text-fill : white;
+-fx-background-radius: 20px;
+-fx-cursor: hand;
+-fx-font-size:14px;
+}
+
+#create_button:hover{
+-fx-background-color: linear-gradient(#0F172A,#2a4991);
+-fx-font-size:15px;
+}
+
+#create_button:armed {
+-fx-background-color: #0F172A;
+}
+
+#back_to_log_in_btn{
+-fx-font-size:14px;
+}
+
+#back_to_log_in_btn:hover{
+-fx-font-size:15px;
+}
+
+/** Applications List **/
+
+#addApplicationBtn {
+    -fx-background-color: linear-gradient(#182a65,#112c7e);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.75),14,0,0,5);
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding:8 20;
+    -fx-cursor: hand;
+    -fx-text-fill:white;
+}
+
+#addApplicationBtn:hover {
+    -fx-background-color:linear-gradient(#112c7e,#182a65);
+    -fx-font-size: 12.2px;
+}
+
+#addApplicationBtn:armed {
+    -fx-background-color: #1f3073;
+
+}
+
+
+/** Create Application and Edit Application **/
+
+#statusCombo {
+    -fx-background-color: #ffffff;
+    -fx-border-color : #c8cdd6;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-width: 1.5px;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+#statusCombo .list-cell {
+    -fx-text-fill: #1a1a2e;
+    -fx-padding: 5 10 5 10;
+}
+
+#statusCombo:hover {
+
+    -fx-effect: dropshadow(gaussian, rgba(99,102,241,0.15), 6, 0, 0, 2);
+}
+
+#statusCombo .arrow-button {
+    -fx-background-color: #112c7e;
+    -fx-background-radius: 0 8px 8px 0;
+}
+
+#statusCombo .arrow {
+    -fx-background-color: white;
+}
+
+#statusCombo .combo-box-popup .list-view {
+    -fx-border-color: #112c7e;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 8, 0, 0, 3);
+}
+
+#statusCombo .combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #E6E4FF;
+    -fx-text-fill: #112c7e;
+}
+
+#statusCombo .combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: #112c7e;
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #c8cdd6;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-width: 1.5px;
+    -fx-font-size: 13px;
+    -fx-padding: 6 10 6 10;
+}
+
+.text-field:focused {
+    -fx-border-color: #112c7e;
+    -fx-effect: dropshadow(gaussian, rgba(17,44,126,0.15), 6, 0, 0, 2);
+}
+
+.text-field:hover{
+    -fx-effect: dropshadow(gaussian, rgba(99,102,241,0.15), 6, 0, 0, 2);
+}
+
+.text-area {
+    -fx-background-color: white;
+    -fx-border-color: #c8cdd6;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-width: 1.5px;
+    -fx-font-size: 13px;
+}
+
+.text-area:hover {
+    -fx-effect: dropshadow(gaussian, rgba(99,102,241,0.15), 6, 0, 0, 2);
+}
+
+.text-area:focused {
+    -fx-border-color: #112c7e;
+    -fx-effect: dropshadow(gaussian, rgba(17,44,126,0.15), 6, 0, 0, 2);
+}
+
+.text-area .content {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-padding: 6 10 6 10;
+}
+
+.date-picker {
+    -fx-background-color: white;
+    -fx-border-color: #c8cdd6;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-width: 1.5px;
+    -fx-font-size: 13px;
+}
+
+.date-picker:focused {
+    -fx-border-color: #112c7e;
+}
+
+.date-picker .text-field {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 8px 0 0 8px;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #112c7e;
+    -fx-background-radius: 0 8px 8px 0;
+    -fx-cursor: hand;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: white;
+}
+
+/* Calendar popup background */
+.date-picker-popup {
+    -fx-background-color: white;
+    -fx-border-color: #112c7e;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(17,44,126,0.15), 10, 0, 0, 3);
+}
+
+/* Header (month/year row) */
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #112c7e;
+    -fx-background-radius: 6px 6px 0 0;
+}
+
+/* Month and year labels */
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+    -fx-background-color: white;
+}
+
+.date-picker-popup .spinner .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Navigation arrows */
+.date-picker-popup .spinner .button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.date-picker-popup .spinner .button:hover {
+    -fx-background-color: #1a3a9e;
+}
+
+/* Day of week headers (Sun Mon Tue...) */
+.date-picker-popup .day-name-cell {
+    -fx-text-fill: #112c7e;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+/* Regular day cells */
+.date-picker-popup .day-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1a1a2e;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.date-picker-popup .day-cell:hover {
+    -fx-background-color: #E6E4FF;
+    -fx-background-radius: 50%;
+    -fx-text-fill: #112c7e;
+    -fx-font-weight: bold;
+}
+
+/* Selected day */
+.date-picker-popup .day-cell.selected {
+    -fx-background-color: #112c7e;
+    -fx-background-radius: 50%;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Today */
+.date-picker-popup .today {
+    -fx-background-color: #E6E4FF;
+    -fx-background-radius: 50%;
+    -fx-text-fill: #112c7e;
+    -fx-font-weight: bold;
+}
+
+/* Days outside current month */
+.date-picker-popup .day-cell.outside-month {
+    -fx-text-fill: #94A3B8;
+}
+
+#cancelBtn {
+    -fx-background-color: #c7c3c9;
+    -fx-text-fill: #1a1a2e;
+    -fx-background-radius: 10px;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 30 8 30;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+}
+
+#cancelBtn:hover {
+    -fx-background-color: #b0acb2;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 6, 0, 0, 2);
+}
+
+#cancelBtn:pressed {
+    -fx-background-color: #9e9aa0;
+    -fx-effect: none;
+}
+
+/** Application List changed from controller **/
+.app-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 0, 2);
+}
+
+.app-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(17,44,126,0.15), 10, 0, 0, 3);
+}
+
+.app-card-title {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1a1a2e;
+    -fx-cursor: hand;
+}
+
+.app-card-title:hover {
+    -fx-text-fill: #112c7e;
+    -fx-underline: true;
+}
+
+.btn-edit {
+    -fx-background-color: #112c7e;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 6 14 6 14;
+}
+
+.btn-edit:hover {
+    -fx-background-color: #1a3a9e;
+    -fx-effect: dropshadow(gaussian, rgba(17,44,126,0.2), 6, 0, 0, 2);
+}
+
+.btn-delete {
+    -fx-background-color: #EF4444;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 6 14 6 14;
+}
+
+.btn-delete:hover {
+    -fx-background-color: #DC2626;
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.2), 6, 0, 0, 2);
+}
+
+/** Resume **/
+.resume-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-padding:15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 6, 0, 0, 2);
+}
+
+.resume-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(17,44,126,0.15), 10, 0, 0, 3);
+}
+
+.resume-name {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #112c7e;
+    -fx-cursor: hand;
+}
+
+.resume-name:hover {
+    -fx-underline: true;
+}
+
+.resume-empty-label {
+    -fx-text-fill: #888;
+    -fx-font-size: 14px;
+}
+
+.btn-download {
+    -fx-background-color: #112c7e;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+
+}
+
+.btn-download:hover {
+    -fx-background-color: #1a3a9e;
+    -fx-effect: dropshadow(gaussian, rgba(17,44,126,0.2), 6, 0, 0, 2);
+}
+
+
+/** Calendar **/
+
+/* Calendar cell hover */
+.calendar-cell {
+    -fx-background-color: white;
+    -fx-border-color: #e2e8f0;
+    -fx-border-width: 0.5px;
+    -fx-cursor: hand;
+}
+
+.calendar-cell:hover {
+    -fx-background-color: #E6E4FF;
+}
+
+/* Calendar popup */
+.calendar-popup-box {
+    -fx-background-color: white;
+    -fx-border-color: #112c7e;
+    -fx-border-width: 3px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(17,44,126,0.2), 12, 0, 0, 4);
+}
+
+/* Navigation buttons */
+.calendar-nav-btn {
+    -fx-background-color: white;
+    -fx-border-color: #112c7e;
+    -fx-border-radius: 6px;
+    -fx-border-width: 2.5px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-pref-width: 36px;
+    -fx-pref-height: 36px;
+}
+
+.calendar-nav-btn:hover {
+    -fx-background-color: #112c7e;
+    -fx-text-fill: white;
+}
+
+/* Close button */
+.calendar-close-btn {
+    -fx-background-color: #E6E4FF;
+    -fx-border-color: #112c7e;
+    -fx-border-radius: 6px;
+    -fx-border-width: 2.5px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-pref-width: 46px;
+    -fx-pref-height: 46px;
+}
+
+.calendar-close-btn:hover {
+    -fx-background-color: #112c7e;
+    -fx-text-fill: white;
+}
+
+/* TextAreas inside popup */
+.calendar-textarea {
+    -fx-background-color: #F8FAFC;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-width: 1.5px;
+    -fx-font-size: 13px;
+}
+
+.calendar-textarea:focused {
+    -fx-border-color: #112c7e;
+}

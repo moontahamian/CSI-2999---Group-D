@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="700" prefWidth="1100" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.ApplicationsController">
+<BorderPane prefHeight="700" prefWidth="1100" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo2.ApplicationsController">
 
 
     <!-- CENTER CONTENT -->
@@ -36,25 +36,25 @@
                     <GridPane hgap="15" vgap="15">
 
                         <Label text="Company Name:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <TextField fx:id="companyField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <TextField fx:id="companyField" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                         <Label text="Position Title:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                        <TextField fx:id="titleField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="titleField" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                         <Label text="Application Date:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                        <DatePicker fx:id="datePicker" style="-fx-cursor: hand;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <DatePicker fx:id="datePicker" style="-fx-cursor: hand;" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                         <Label text="Status:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                        <ComboBox fx:id="statusCombo" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <ComboBox fx:id="statusCombo" prefWidth="200" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></ComboBox>
 
                         <Label text="Deadline:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                        <DatePicker fx:id="deadlinePicker" style="-fx-cursor: hand;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <DatePicker fx:id="deadlinePicker" style="-fx-cursor: hand;" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
                         <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                        <TextField fx:id="locationField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <TextField fx:id="locationField" stylesheets="@style.css" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <columnConstraints>
                             <ColumnConstraints />
                             <ColumnConstraints />
@@ -71,18 +71,18 @@
                     </GridPane>
 
                     <Label text="Description:" />
-                    <TextArea fx:id="descriptionArea" prefHeight="80" wrapText="true" />
+                    <TextArea fx:id="descriptionArea" prefHeight="80" stylesheets="@style.css" wrapText="true" />
 
                     <Label text="Notes:" />
-                    <TextArea fx:id="notesArea" prefHeight="70" wrapText="true" />
+                    <TextArea fx:id="notesArea" prefHeight="70" stylesheets="@style.css" wrapText="true" />
 
                     <!-- BUTTONS -->
                     <HBox alignment="CENTER_RIGHT">
-                        <Button onAction="#handleCancel" style="-fx-background-color: #c7c3c9; -fx-background-radius: 10; -fx-padding: 8 30; -fx-cursor: hand;" text="Cancel">
+                        <Button fx:id="cancelBtn" onAction="#handleCancel" stylesheets="@style.css" text="Cancel">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin></Button>
-                        <Button fx:id="addApplicationButton" onAction="#handleAddApplication" prefHeight="33.0" prefWidth="169.0" style="-fx-background-color: #0F172A; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold; -fx-padding: 8 20; -fx-cursor: hand;" text="ADD APPLICATION">
+                        <Button id="addApplicationBtn" fx:id="addApplicationButton" onAction="#handleAddApplication" prefHeight="33.0" prefWidth="169.0" stylesheets="@style.css" text="ADD APPLICATION">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin></Button>
