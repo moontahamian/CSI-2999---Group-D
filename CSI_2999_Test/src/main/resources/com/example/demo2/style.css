@@ -424,19 +424,20 @@
 
 /* Navigation buttons */
 .calendar-nav-btn {
-    -fx-background-color: white;
-    -fx-border-color: #112c7e;
-    -fx-border-radius: 6px;
+    -fx-background-color: transparent;
     -fx-border-width: 2.5px;
     -fx-font-weight: bold;
     -fx-cursor: hand;
     -fx-pref-width: 36px;
     -fx-pref-height: 36px;
+
 }
 
 .calendar-nav-btn:hover {
-    -fx-background-color: #112c7e;
+    -fx-background-color: #5973ad;
     -fx-text-fill: white;
+    -fx-background-radius:36px;
+    -fx-font-weight:bold;
 }
 
 /* Close button */
