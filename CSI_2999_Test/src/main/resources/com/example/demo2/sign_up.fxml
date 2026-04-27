@@ -15,9 +15,9 @@
     <!-- LEFT SIDEBAR -->
     <VBox alignment="CENTER" prefHeight="500.0" prefWidth="340.0" style="-fx-background-color: #0F172A;">
 
-        <Label style="-fx-text-fill: white;         -fx-font-size: 26;         -fx-font-weight: bold;" text="WELCOME" />
+        <Label style="-fx-text-fill: white; -fx-font-size: 26; -fx-font-weight: bold;" text="WELCOME" />
 
-        <Label style="-fx-text-fill: #94A3B8;         -fx-padding: 10 0 0 0;" text="Create your account" />
+        <Label style="-fx-text-fill: #94A3B8; -fx-padding: 10 0 0 0;" text="Create your account" />
 
     </VBox>
 

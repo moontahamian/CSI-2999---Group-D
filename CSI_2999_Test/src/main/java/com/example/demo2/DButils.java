@@ -12,9 +12,20 @@ import java.nio.file.Paths;
 public class DButils {
 
     private static final Path DB_PATH = Paths.get(
-            System.getProperty("app.db.path", "newdatabase.db")
+            System.getProperty("user.home"),
+            ".jobtracker",
+            "newdatabase.db"
     ).toAbsolutePath().normalize();
     private static final String URL = "jdbc:sqlite:" + DB_PATH.toString().replace('\\', '/');
+
+    static {
+        try {
+            java.nio.file.Files.createDirectories(DB_PATH.getParent());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // CONNECTION
     public static Connection getConnection() throws Exception {
         return DriverManager.getConnection(URL);

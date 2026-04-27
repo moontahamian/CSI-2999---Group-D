@@ -37,7 +37,9 @@
 
                <HBox prefWidth="983.0" spacing="20">
 
-                  <VBox prefWidth="983.0" spacing="10" style="-fx-background-color: white;                                      -fx-background-radius: 12;                                      -fx-padding: 15;" HBox.hgrow="ALWAYS">
+                  <VBox prefWidth="983.0" spacing="10" style="-fx-background-color: white;
+                  -fx-background-radius: 12;
+                  -fx-padding: 15;" HBox.hgrow="ALWAYS">
 
                      <!-- NAVIGATION ROW -->
                      <HBox alignment="CENTER" prefHeight="38.0" prefWidth="953.0">
@@ -158,7 +160,12 @@
                </HBox>
 
                <!-- POPUP -->
-               <VBox fx:id="calendar_popup" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="488.0" prefWidth="417.0" style="-fx-background-color: white;                                  -fx-border-color: #112c7e;                                  -fx-border-width: 5;                                  -fx-border-radius: 12;                                  -fx-background-radius: 12;                                  -fx-effect: dropshadow(gaussian, rgba(17,44,126,0.2), 12, 0, 0, 4);" visible="false" StackPane.alignment="CENTER">
+               <VBox fx:id="calendar_popup" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="488.0" prefWidth="417.0" style="-fx-background-color: white;
+               -fx-border-color: #112c7e;
+               -fx-border-width: 5;
+               -fx-border-radius: 12;
+               -fx-background-radius: 12;
+               -fx-effect: dropshadow(gaussian, rgba(17,44,126,0.2), 12, 0, 0, 4);" visible="false" StackPane.alignment="CENTER">
 
                   <!-- POPUP HEADER -->
                   <HBox alignment="TOP_RIGHT" prefHeight="58.0" prefWidth="401.0">

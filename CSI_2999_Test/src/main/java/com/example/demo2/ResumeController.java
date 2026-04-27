@@ -108,15 +108,35 @@ public class ResumeController {
 
     private void openResume(byte[] pdfData, String fileName) {
         try {
-            File tempFile = File.createTempFile("resume_preview_", ".pdf");
-            tempFile.deleteOnExit();
-            Files.write(tempFile.toPath(), pdfData);
+            File pdfFile = new File(System.getProperty("user.home"), "resume_preview_" + fileName);
+            Files.write(pdfFile.toPath(), pdfData);
+            pdfFile.setReadable(true);
 
-            if (Desktop.isDesktopSupported()) {
-                Desktop.getDesktop().open(tempFile);
+            String os = System.getProperty("os.name").toLowerCase();
+
+            if (os.contains("win")) {
+                // Windows — Desktop API works reliably here
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    // Fallback for Windows
+                    new ProcessBuilder("cmd", "/c", "start", pdfFile.getAbsolutePath()).start();
+                }
+            } else if (os.contains("mac")) {
+                new ProcessBuilder("open", pdfFile.getAbsolutePath()).start();
             } else {
-                showAlert(Alert.AlertType.ERROR, "Resume", "Cannot open PDF on this system.");
+                // Linux
+                String[] commands = { "/usr/bin/xdg-open", "xdg-open", "evince", "okular" };
+                for (String cmd : commands) {
+                    try {
+                        new ProcessBuilder(cmd, pdfFile.getAbsolutePath())
+                                .inheritIO()
+                                .start();
+                        break;
+                    } catch (IOException ignored) {}
+                }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Resume", "Could not open the PDF.");

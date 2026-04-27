@@ -27,6 +27,10 @@ public class Launcher extends Application {
                 Launcher.class.getResource("style.css").toExternalForm()
         );
         stage.setTitle("NextStep");
+//      PNG
+        stage.getIcons().add(new javafx.scene.image.Image(
+                Launcher.class.getResourceAsStream("icons/img_1.png")
+        ));
         stage.setScene(scene);
         stage.show();
     }
